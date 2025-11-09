@@ -222,5 +222,11 @@ Após cada execução de detecção, o sistema cria os seguintes arquivos:
 | **Banco de dados local** | `.db` | Base de dados SQLite usada como fallback quando o Oracle não está acessível. | `outputs/` |
 
 ---
+## INTEGRANTES
+- Eduardo Eiki - RM 554921
+- Nicollas Frei - RM 557647
+- Heitor Duarte - RM 558208
 
+## LINK
+https://youtu.be/551HdNj7hw4
 
