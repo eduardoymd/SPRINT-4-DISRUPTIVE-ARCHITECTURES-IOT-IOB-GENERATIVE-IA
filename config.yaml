@@ -1,0 +1,13 @@
+model_path: "models/best.pt"
+conf: 0.5
+iou: 0.45
+imgsz: 640
+sqlite_path: "outputs/results.db"
+
+oracle:
+  enabled: true
+  user: "RM554921"
+  password: "250701"
+  dsn: "oracle.fiap.com.br"
+  sid: "ORCL"
+  table: "TB_MOTOS"
