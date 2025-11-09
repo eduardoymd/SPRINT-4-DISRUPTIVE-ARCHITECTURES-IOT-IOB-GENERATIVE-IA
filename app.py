@@ -35,7 +35,6 @@ CFG = load_config()
 st.title("Motorcycle Detection Dashboard (dashboardPro)")
 st.sidebar.header("Controls")
 
-# Sidebar parameters
 conf = st.sidebar.slider("Confidence", 0.1, 0.95, float(CFG.get("conf", 0.5)), 0.05)
 iou = st.sidebar.slider("IoU", 0.1, 0.9, float(CFG.get("iou", 0.45)), 0.05)
 imgsz = st.sidebar.slider("Image size", 320, 1280, int(CFG.get("imgsz", 640)), 32)
@@ -43,7 +42,6 @@ process_mode = st.sidebar.radio("Mode", ["Upload video", "Batch folder"])
 video_file = st.sidebar.file_uploader("Upload video", type=["mp4", "avi", "mov", "mkv"]) if process_mode == "Upload video" else None
 run_btn = st.sidebar.button("Run Detection")
 
-# Load YOLO model
 try:
     from ultralytics import YOLO
 except Exception:
@@ -178,7 +176,6 @@ if process_mode == "Upload video" and video_file is not None and run_btn:
 
     df, annotated = process_video_file(in_path)
 
-    # KPI CARD
     st.markdown(
         f"<div style='background-color:#005A23;padding:15px;border-radius:12px;margin-bottom:15px;text-align:center;'>"
         f"<span style='font-size:22px;color:#34D231;font-weight:bold;'>🏍️ Total Motorcycles Detected: {len(df)}</span>"
@@ -192,7 +189,7 @@ if process_mode == "Upload video" and video_file is not None and run_btn:
         except Exception:
             st.info(f"Video saved at: `{annotated}` (open manually)")
 
-    # Save locally
+
     csv_path = Path("outputs") / (in_path.stem + "_detections.csv")
     df.to_csv(csv_path, index=False)
     xlsx_path = Path("outputs") / (in_path.stem + "_detections.xlsx")
@@ -204,7 +201,8 @@ if process_mode == "Upload video" and video_file is not None and run_btn:
                        file_name=xlsx_path.name,
                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
-    # Save to DB
+
+#Salva no Banco de Dados - (Oracle SQL)
     engine = connect_oracle_sqlalchemy()
     table_name = CFG["oracle"]["table"].upper()
     if engine is not None:
